@@ -6,8 +6,12 @@ name = "pypi"
 [packages]
 django = "*"
 djangorestframework = "*"
+phonenumbers = "*"
+python-dateutil = "*"
+django-filter = "*"
 
 [dev-packages]
+django-debug-toolbar = "*"
 
 [requires]
 python_version = "3.12"
