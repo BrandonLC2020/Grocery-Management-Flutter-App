@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from backend.apps.generic.models import DefaultModel
 
