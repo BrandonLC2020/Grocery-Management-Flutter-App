@@ -10,7 +10,7 @@ class Category(DefaultModel):
     def __str__(self):
         return self.name
     
-class PantryItem(models.Model):
+class PantryItem(DefaultModel):
     """
     Represents a generic item that can be stored in the pantry.
     This model holds the 'master' information about a product.

@@ -17,7 +17,7 @@ class Store(DefaultModel):
     def __str__(self):
         return self.name
     
-class GroceryTrip(models.Model):
+class GroceryTrip(DefaultModel):
     """
     Represents a single grocery shopping trip.
     """
@@ -29,7 +29,7 @@ class GroceryTrip(models.Model):
     def __str__(self):
         return f"Trip to {self.store.name} on {self.trip_date}"
 
-class PurchasedItem(models.Model):
+class PurchasedItem(DefaultModel):
     """
     An associative entity that links a PantryItem to a GroceryTrip,
     recording the specific details of that purchase.
