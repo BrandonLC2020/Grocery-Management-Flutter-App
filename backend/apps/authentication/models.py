@@ -23,20 +23,27 @@ class UserManager(DefaultModelManager, BaseUserManager):
 
         return self.create_user(email, username, password, **extra_fields)
 
+# backend/apps/auth/models.py
+
 class User(DefaultModel, AbstractBaseUser, PermissionsMixin):
+    # ... existing fields ...
     username = models.CharField(max_length=150, unique=True)
     email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=30, blank=True)
-    last_name = models.CharField(max_length=150, blank=True)
-    is_admin = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    date_joined = models.DateTimeField(auto_now_add=True)
-    last_login = models.DateTimeField(auto_now=True)
-
+    
+    # --- ADD YOUR CUSTOM FIELDS HERE ---
+    phone_number = models.CharField(max_length=15, blank=True, null=True)
+    bio = models.TextField(blank=True)
+    
+    # ... existing configuration ...
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
     objects = UserManager()
+
+    # --- ADD CUSTOM METHODS/PROPERTIES ---
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}".strip()
 
     def __str__(self):
         return self.email
