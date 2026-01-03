@@ -1,13 +1,25 @@
-// lib/main.dart
 import 'package:flutter/material.dart';
-// Import the new service
+import 'package:toastification/toastification.dart';
 import 'package:grocery_management_frontend/services/startup_services.dart';
+import 'package:grocery_management_frontend/services/app_config.dart';
 
+// Note: Removed "part 'main.mapper.dart';" as we are using StartupServices manually.
 
-void main() {
-  initializeAppServices();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   
-  runApp(const MyApp());
+  StartupServices.startServices();
+  
+  const String environment = String.fromEnvironment('ENV', defaultValue: 'dev');
+  
+  // Load the matching JSON file (dev.json or prod.json)
+  await AppConfig.load(environment);
+
+  runApp(
+    const ToastificationWrapper(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -16,10 +28,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Grocery App',
+      title: 'Grocery Management',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
+      // If you have an AuthBlocWidget, you can use it here. 
+      // For now, I'm keeping your existing MyHomePage or you can switch to AuthBlocWidget().
       home: const MyHomePage(title: 'Grocery Management Home'),
     );
   }
