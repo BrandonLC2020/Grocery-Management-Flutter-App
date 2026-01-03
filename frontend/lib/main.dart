@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_management_frontend/networking/dto/dto.dart';
+
+part 'main.mapper.dart';
 
 void main() {
+  initializeMappers();
   runApp(const MyApp());
 }
 
