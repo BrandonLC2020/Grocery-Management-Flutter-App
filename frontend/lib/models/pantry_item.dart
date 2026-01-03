@@ -1,10 +1,6 @@
 class PantryItem {
   const PantryItem({
     required this.id,
-    required this.status,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.user,
     required this.name,
     this.category,
     required this.quantity,
@@ -18,10 +14,6 @@ class PantryItem {
   });
 
   final int id;
-  final String status;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final int user;
   final String name;
   final int? category;
   final int quantity;

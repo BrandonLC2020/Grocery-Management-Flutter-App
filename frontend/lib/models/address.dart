@@ -1,9 +1,6 @@
 class Address {
   const Address({
     required this.id,
-    required this.status,
-    required this.createdAt,
-    required this.updatedAt,
     required this.addressLine,
     required this.city,
     required this.state,
@@ -14,9 +11,6 @@ class Address {
   });
 
   final int id;
-  final String status;
-  final DateTime createdAt;
-  final DateTime updatedAt;
   final String addressLine;
   final String city;
   final String state;
