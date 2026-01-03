@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_management_frontend/bloc/store/store_bloc.dart';
 import 'package:grocery_management_frontend/bloc/trips/trip_bloc.dart';
-import 'package:grocery_management_frontend/models/store.dart';
 import 'package:grocery_management_frontend/models/pantry_item.dart';
 import 'package:grocery_management_frontend/bloc/pantry/pantry_bloc.dart';
 import 'package:grocery_management_frontend/screens/pantry/pantry_search_screen.dart';
