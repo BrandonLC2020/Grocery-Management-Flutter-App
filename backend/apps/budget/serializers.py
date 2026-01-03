@@ -1,4 +1,4 @@
-from backend.apps.budget.models import MonthlyBudget
+from apps.budget.models import MonthlyBudget
 from rest_framework import serializers
 
 class BudgetSerializer(serializers.ModelSerializer):

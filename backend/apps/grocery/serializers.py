@@ -1,4 +1,4 @@
-from backend.apps.grocery.models import Store, GroceryTrip, PurchasedItem
+from apps.grocery.models import Store, GroceryTrip, PurchasedItem
 from rest_framework import serializers
 
 class PurchasedItemSerializer(serializers.ModelSerializer):

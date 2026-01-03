@@ -1,4 +1,4 @@
-from backend.apps.generic.models import DefaultModel, DefaultModelManager
+from apps.generic.models import DefaultModel, DefaultModelManager
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 

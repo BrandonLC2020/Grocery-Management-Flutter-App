@@ -1,6 +1,6 @@
 from rest_framework import viewsets, permissions
-from backend.apps.budget.models import MonthlyBudget
-from backend.apps.budget.serializers import BudgetSerializer
+from apps.budget.models import MonthlyBudget
+from apps.budget.serializers import BudgetSerializer
 
 
 class BudgetViewSet(viewsets.ModelViewSet):

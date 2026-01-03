@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from backend.apps.pantry.models import PantryItem, Category
+from apps.pantry.models import PantryItem, Category
 
 class PantryItemSerializer(serializers.ModelSerializer):
     class Meta:
