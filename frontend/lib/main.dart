@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_management_frontend/bloc/auth/auth_bloc.dart';
+import 'package:grocery_management_frontend/networking/api/api_client.dart';
 import 'package:grocery_management_frontend/networking/auth_repository.dart';
 import 'package:grocery_management_frontend/screens/auth/login_screen.dart';
 import 'package:grocery_management_frontend/screens/auth/register_screen.dart';
@@ -12,11 +13,14 @@ import 'package:toastification/toastification.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+
   StartupServices.startServices();
 
   const String environment = String.fromEnvironment('ENV', defaultValue: 'dev');
 
   await AppConfig.load(environment);
+
+  ApiClient().init(AppConfig.baseUrl);
 
   runApp(
     const ToastificationWrapper(

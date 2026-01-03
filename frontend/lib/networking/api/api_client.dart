@@ -1,11 +1,20 @@
 import 'package:dio/dio.dart';
-import 'package:grocery_management_frontend/services/app_config.dart';
 
 class ApiClient {
-  final Dio _dio;
+  static final ApiClient _instance = ApiClient._internal();
+  late final Dio _dio;
 
-  ApiClient() : _dio = Dio(BaseOptions(baseUrl: AppConfig.baseUrl)) {
+  factory ApiClient() {
+    return _instance;
+  }
+
+  ApiClient._internal() {
+    _dio = Dio();
     _dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+  }
+
+  void init(String baseUrl) {
+    _dio.options.baseUrl = baseUrl;
   }
 
   Future<Response<T>> get<T>(String path,

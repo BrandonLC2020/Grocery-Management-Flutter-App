@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_management_frontend/bloc/store/store_bloc.dart';
-import 'package:grocery_management_frontend/models/store.dart';
 
 class StoreListScreen extends StatelessWidget {
   const StoreListScreen({super.key});

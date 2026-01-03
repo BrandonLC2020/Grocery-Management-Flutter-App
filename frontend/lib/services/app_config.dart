@@ -7,7 +7,7 @@ class AppConfig {
 
   static Future<void> load(String env) async {
     try {
-      final String configString = await rootBundle.loadString('assets/config/$env.json');
+      final String configString = await rootBundle.loadString('envs/$env.json');
       _config = json.decode(configString);
       baseUrl = _config['BASE_URL'] ?? '';
     } catch (e) {
