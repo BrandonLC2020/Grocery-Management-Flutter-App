@@ -44,6 +44,36 @@ class UserDtoMapper extends ClassMapperBase<UserDto> {
   );
   static String _$email(UserDto v) => v.email;
   static const Field<UserDto, String> _f$email = Field('email', _$email);
+  static String? _$firstName(UserDto v) => v.firstName;
+  static const Field<UserDto, String> _f$firstName = Field(
+    'firstName',
+    _$firstName,
+    key: r'first_name',
+    opt: true,
+  );
+  static String? _$lastName(UserDto v) => v.lastName;
+  static const Field<UserDto, String> _f$lastName = Field(
+    'lastName',
+    _$lastName,
+    key: r'last_name',
+    opt: true,
+  );
+  static bool _$isActive(UserDto v) => v.isActive;
+  static const Field<UserDto, bool> _f$isActive = Field(
+    'isActive',
+    _$isActive,
+    key: r'is_active',
+    opt: true,
+    def: true,
+  );
+  static bool _$isStaff(UserDto v) => v.isStaff;
+  static const Field<UserDto, bool> _f$isStaff = Field(
+    'isStaff',
+    _$isStaff,
+    key: r'is_staff',
+    opt: true,
+    def: false,
+  );
   static String? _$phoneNumber(UserDto v) => v.phoneNumber;
   static const Field<UserDto, String> _f$phoneNumber = Field(
     'phoneNumber',
@@ -69,6 +99,10 @@ class UserDtoMapper extends ClassMapperBase<UserDto> {
     #updatedAt: _f$updatedAt,
     #username: _f$username,
     #email: _f$email,
+    #firstName: _f$firstName,
+    #lastName: _f$lastName,
+    #isActive: _f$isActive,
+    #isStaff: _f$isStaff,
     #phoneNumber: _f$phoneNumber,
     #bio: _f$bio,
     #lastLogin: _f$lastLogin,
@@ -82,6 +116,10 @@ class UserDtoMapper extends ClassMapperBase<UserDto> {
       updatedAt: data.dec(_f$updatedAt),
       username: data.dec(_f$username),
       email: data.dec(_f$email),
+      firstName: data.dec(_f$firstName),
+      lastName: data.dec(_f$lastName),
+      isActive: data.dec(_f$isActive),
+      isStaff: data.dec(_f$isStaff),
       phoneNumber: data.dec(_f$phoneNumber),
       bio: data.dec(_f$bio),
       lastLogin: data.dec(_f$lastLogin),
@@ -152,6 +190,10 @@ abstract class UserDtoCopyWith<$R, $In extends UserDto, $Out>
     DateTime? updatedAt,
     String? username,
     String? email,
+    String? firstName,
+    String? lastName,
+    bool? isActive,
+    bool? isStaff,
     String? phoneNumber,
     String? bio,
     DateTime? lastLogin,
@@ -175,6 +217,10 @@ class _UserDtoCopyWithImpl<$R, $Out>
     DateTime? updatedAt,
     String? username,
     String? email,
+    Object? firstName = $none,
+    Object? lastName = $none,
+    bool? isActive,
+    bool? isStaff,
     Object? phoneNumber = $none,
     Object? bio = $none,
     Object? lastLogin = $none,
@@ -186,6 +232,10 @@ class _UserDtoCopyWithImpl<$R, $Out>
       if (updatedAt != null) #updatedAt: updatedAt,
       if (username != null) #username: username,
       if (email != null) #email: email,
+      if (firstName != $none) #firstName: firstName,
+      if (lastName != $none) #lastName: lastName,
+      if (isActive != null) #isActive: isActive,
+      if (isStaff != null) #isStaff: isStaff,
       if (phoneNumber != $none) #phoneNumber: phoneNumber,
       if (bio != $none) #bio: bio,
       if (lastLogin != $none) #lastLogin: lastLogin,
@@ -199,6 +249,10 @@ class _UserDtoCopyWithImpl<$R, $Out>
     updatedAt: data.get(#updatedAt, or: $value.updatedAt),
     username: data.get(#username, or: $value.username),
     email: data.get(#email, or: $value.email),
+    firstName: data.get(#firstName, or: $value.firstName),
+    lastName: data.get(#lastName, or: $value.lastName),
+    isActive: data.get(#isActive, or: $value.isActive),
+    isStaff: data.get(#isStaff, or: $value.isStaff),
     phoneNumber: data.get(#phoneNumber, or: $value.phoneNumber),
     bio: data.get(#bio, or: $value.bio),
     lastLogin: data.get(#lastLogin, or: $value.lastLogin),

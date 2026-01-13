@@ -1,4 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:grocery_management_frontend/networking/dto/purchased_item_dto.dart';
 
 part 'grocery_trip_dto.mapper.dart';
 
@@ -13,6 +14,7 @@ class GroceryTripDto with GroceryTripDtoMappable {
     required this.store,
     required this.tripDate,
     required this.totalSpent,
+    this.purchasedItems,
     this.createdBy,
     this.updatedBy,
   });
@@ -25,6 +27,7 @@ class GroceryTripDto with GroceryTripDtoMappable {
   final int store;
   final DateTime tripDate;
   final double totalSpent;
+  final List<PurchasedItemDto>? purchasedItems;
   final int? createdBy;
   final int? updatedBy;
 

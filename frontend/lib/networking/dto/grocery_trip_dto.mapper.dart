@@ -14,6 +14,7 @@ class GroceryTripDtoMapper extends ClassMapperBase<GroceryTripDto> {
   static GroceryTripDtoMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = GroceryTripDtoMapper._());
+      PurchasedItemDtoMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -56,6 +57,15 @@ class GroceryTripDtoMapper extends ClassMapperBase<GroceryTripDto> {
     _$totalSpent,
     key: r'total_spent',
   );
+  static List<PurchasedItemDto>? _$purchasedItems(GroceryTripDto v) =>
+      v.purchasedItems;
+  static const Field<GroceryTripDto, List<PurchasedItemDto>> _f$purchasedItems =
+      Field(
+        'purchasedItems',
+        _$purchasedItems,
+        key: r'purchased_items',
+        opt: true,
+      );
   static int? _$createdBy(GroceryTripDto v) => v.createdBy;
   static const Field<GroceryTripDto, int> _f$createdBy = Field(
     'createdBy',
@@ -81,6 +91,7 @@ class GroceryTripDtoMapper extends ClassMapperBase<GroceryTripDto> {
     #store: _f$store,
     #tripDate: _f$tripDate,
     #totalSpent: _f$totalSpent,
+    #purchasedItems: _f$purchasedItems,
     #createdBy: _f$createdBy,
     #updatedBy: _f$updatedBy,
   };
@@ -95,6 +106,7 @@ class GroceryTripDtoMapper extends ClassMapperBase<GroceryTripDto> {
       store: data.dec(_f$store),
       tripDate: data.dec(_f$tripDate),
       totalSpent: data.dec(_f$totalSpent),
+      purchasedItems: data.dec(_f$purchasedItems),
       createdBy: data.dec(_f$createdBy),
       updatedBy: data.dec(_f$updatedBy),
     );
@@ -162,6 +174,12 @@ extension GroceryTripDtoValueCopy<$R, $Out>
 
 abstract class GroceryTripDtoCopyWith<$R, $In extends GroceryTripDto, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
+  ListCopyWith<
+    $R,
+    PurchasedItemDto,
+    PurchasedItemDtoCopyWith<$R, PurchasedItemDto, PurchasedItemDto>
+  >?
+  get purchasedItems;
   $R call({
     int? id,
     String? status,
@@ -171,6 +189,7 @@ abstract class GroceryTripDtoCopyWith<$R, $In extends GroceryTripDto, $Out>
     int? store,
     DateTime? tripDate,
     double? totalSpent,
+    List<PurchasedItemDto>? purchasedItems,
     int? createdBy,
     int? updatedBy,
   });
@@ -188,6 +207,19 @@ class _GroceryTripDtoCopyWithImpl<$R, $Out>
   late final ClassMapperBase<GroceryTripDto> $mapper =
       GroceryTripDtoMapper.ensureInitialized();
   @override
+  ListCopyWith<
+    $R,
+    PurchasedItemDto,
+    PurchasedItemDtoCopyWith<$R, PurchasedItemDto, PurchasedItemDto>
+  >?
+  get purchasedItems => $value.purchasedItems != null
+      ? ListCopyWith(
+          $value.purchasedItems!,
+          (v, t) => v.copyWith.$chain(t),
+          (v) => call(purchasedItems: v),
+        )
+      : null;
+  @override
   $R call({
     int? id,
     String? status,
@@ -197,6 +229,7 @@ class _GroceryTripDtoCopyWithImpl<$R, $Out>
     int? store,
     DateTime? tripDate,
     double? totalSpent,
+    Object? purchasedItems = $none,
     Object? createdBy = $none,
     Object? updatedBy = $none,
   }) => $apply(
@@ -209,6 +242,7 @@ class _GroceryTripDtoCopyWithImpl<$R, $Out>
       if (store != null) #store: store,
       if (tripDate != null) #tripDate: tripDate,
       if (totalSpent != null) #totalSpent: totalSpent,
+      if (purchasedItems != $none) #purchasedItems: purchasedItems,
       if (createdBy != $none) #createdBy: createdBy,
       if (updatedBy != $none) #updatedBy: updatedBy,
     }),
@@ -223,6 +257,7 @@ class _GroceryTripDtoCopyWithImpl<$R, $Out>
     store: data.get(#store, or: $value.store),
     tripDate: data.get(#tripDate, or: $value.tripDate),
     totalSpent: data.get(#totalSpent, or: $value.totalSpent),
+    purchasedItems: data.get(#purchasedItems, or: $value.purchasedItems),
     createdBy: data.get(#createdBy, or: $value.createdBy),
     updatedBy: data.get(#updatedBy, or: $value.updatedBy),
   );

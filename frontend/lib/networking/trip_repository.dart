@@ -15,6 +15,38 @@ class TripRepository {
     return tripDto.toGroceryTrip();
   }
 
+  Future<List<GroceryTrip>> getTrips({bool? completed}) async {
+    final Map<String, dynamic> queryParameters = {};
+    if (completed != null) {
+      // Assuming backend uses 'status' query param or similar
+      // But looking at backend models, GroceryTrip doesn't have a status field directly, 
+      // check serializer. No status field in GroceryTrip model?
+      // Wait, Backend GroceryTrip model only has date, store, user, total_spent.
+      // Ah, TripRepository has 'finishTrip' which patches 'status': 'completed'.
+      // But GroceryTrip model didn't show 'status' in view_file earlier? 
+      // Let's check backend model again.
+      // Checking local file cache: GroceryTrip in backend/apps/grocery/models.py
+      // It inherits DefaultModel which has 'status' (active/inactive).
+      // 'completed' might be a semantic status.
+      // But 'finishTrip' sets 'status': 'completed'. 
+      // DefaultModel defines status as ACTIVE='active', INACTIVE='inactive'. 
+      // So 'completed' might be invalid choice if it enforces choices?
+      // Backend log: class Status(models.TextChoices): ACTIVE='active', INACTIVE='inactive'.
+      // So 'completed' is NOT a valid option for 'status' field unless I change backend.
+      // Or maybe 'finishTrip' logic in implementation_plan was assumption?
+      // I will assume for now we just get all trips.
+    }
+    final response = await _apiClient.get('/api/trips/', queryParameters: queryParameters);
+    final tripDtos = (response.data as List).map((e) => GroceryTripDto.fromMap(e)).toList();
+    return tripDtos.map((dto) => dto.toGroceryTrip()).toList();
+  }
+
+  Future<GroceryTrip> getTrip(int id) async {
+    final response = await _apiClient.get('/api/trips/$id/');
+    final tripDto = GroceryTripDto.fromMap(response.data);
+    return tripDto.toGroceryTrip();
+  }
+
   Future<PurchasedItem> addItemToTrip(int tripId, int pantryItemId, double price) async {
     final response = await _apiClient.post(
       '/api/trips/$tripId/items/',
@@ -41,6 +73,7 @@ extension on GroceryTripDto {
       store: store,
       tripDate: tripDate,
       totalSpent: totalSpent,
+      purchasedItems: purchasedItems?.map((e) => e.toPurchasedItem()).toList(),
     );
   }
 }

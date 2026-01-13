@@ -12,6 +12,7 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
       : _budgetRepository = budgetRepository,
         super(const BudgetState()) {
     on<FetchBudget>(_onFetchBudget);
+    on<SetBudget>(_onSetBudget);
   }
 
   void _onFetchBudget(FetchBudget event, Emitter<BudgetState> emit) async {
@@ -22,6 +23,16 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
       emit(state.copyWith(status: BudgetStatus.success, budget: budget));
     } catch (e) {
       emit(state.copyWith(status: BudgetStatus.failure));
+    }
+  }
+
+  void _onSetBudget(SetBudget event, Emitter<BudgetState> emit) async {
+    try {
+      final budget = await _budgetRepository.setBudget(
+          event.year, event.month, event.amount);
+      emit(state.copyWith(status: BudgetStatus.success, budget: budget));
+    } catch (e) {
+      // Handle error
     }
   }
 }

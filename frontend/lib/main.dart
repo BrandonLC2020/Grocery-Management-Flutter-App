@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_management_frontend/bloc/auth/auth_bloc.dart';
+import 'package:grocery_management_frontend/bloc/budget/budget_bloc.dart';
+import 'package:grocery_management_frontend/bloc/pantry/pantry_bloc.dart';
+import 'package:grocery_management_frontend/bloc/store/store_bloc.dart';
+import 'package:grocery_management_frontend/bloc/trips/trip_bloc.dart';
 import 'package:grocery_management_frontend/networking/api/api_client.dart';
 import 'package:grocery_management_frontend/networking/auth_repository.dart';
+import 'package:grocery_management_frontend/networking/budget_repository.dart';
+import 'package:grocery_management_frontend/networking/pantry_repository.dart';
+import 'package:grocery_management_frontend/networking/store_repository.dart';
+import 'package:grocery_management_frontend/networking/trip_repository.dart';
 import 'package:grocery_management_frontend/screens/auth/login_screen.dart';
 import 'package:grocery_management_frontend/screens/auth/register_screen.dart';
 import 'package:grocery_management_frontend/screens/dashboard/home_screen.dart';
@@ -34,11 +42,42 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => AuthRepository(),
-      child: BlocProvider(
-        create: (context) =>
-            AuthBloc(authRepository: context.read<AuthRepository>()),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(create: (context) => AuthRepository()),
+        RepositoryProvider(create: (context) => PantryRepository()),
+        RepositoryProvider(create: (context) => StoreRepository()),
+        RepositoryProvider(create: (context) => TripRepository()),
+        RepositoryProvider(create: (context) => BudgetRepository()),
+      ],
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => AuthBloc(
+              authRepository: context.read<AuthRepository>(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => PantryBloc(
+              pantryRepository: context.read<PantryRepository>(),
+            )..add(FetchPantryItems()),
+          ),
+          BlocProvider(
+            create: (context) => StoreBloc(
+              storeRepository: context.read<StoreRepository>(),
+            )..add(FetchStores()),
+          ),
+          BlocProvider(
+            create: (context) => TripBloc(
+              tripRepository: context.read<TripRepository>(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => BudgetBloc(
+              budgetRepository: context.read<BudgetRepository>(),
+            ),
+          ),
+        ],
         child: MaterialApp(
           title: 'Grocery Management',
           theme: ThemeData(

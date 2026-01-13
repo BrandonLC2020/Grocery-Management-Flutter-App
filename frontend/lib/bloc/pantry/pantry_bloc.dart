@@ -14,6 +14,7 @@ class PantryBloc extends Bloc<PantryEvent, PantryState> {
     on<FetchPantryItems>(_onFetchPantryItems);
     on<AddPantryItem>(_onAddPantryItem);
     on<UpdatePantryItem>(_onUpdatePantryItem);
+    on<DeletePantryItem>(_onDeletePantryItem);
   }
 
   void _onFetchPantryItems(
@@ -47,6 +48,18 @@ class PantryBloc extends Bloc<PantryEvent, PantryState> {
         return item.id == updatedItem.id ? updatedItem : item;
       }).toList();
       emit(state.copyWith(items: newItems));
+    } catch (e) {
+      // Handle error
+    }
+  }
+
+  void _onDeletePantryItem(
+      DeletePantryItem event, Emitter<PantryState> emit) async {
+    try {
+      await _pantryRepository.deletePantryItem(event.id);
+      final updatedItems =
+          state.items.where((item) => item.id != event.id).toList();
+      emit(state.copyWith(items: updatedItems, status: PantryStatus.success));
     } catch (e) {
       // Handle error
     }

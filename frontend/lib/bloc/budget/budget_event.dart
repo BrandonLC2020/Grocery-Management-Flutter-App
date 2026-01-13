@@ -8,3 +8,11 @@ class FetchBudget extends BudgetEvent {
 
   FetchBudget({required this.month, required this.year});
 }
+
+class SetBudget extends BudgetEvent {
+  final int month;
+  final int year;
+  final double amount;
+
+  SetBudget({required this.month, required this.year, required this.amount});
+}

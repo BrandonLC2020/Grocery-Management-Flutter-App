@@ -6,22 +6,26 @@ class TripState {
   final TripStatus status;
   final GroceryTrip? trip;
   final List<PurchasedItem> purchasedItems;
+  final List<GroceryTrip> trips;
 
   const TripState({
     this.status = TripStatus.initial,
     this.trip,
     this.purchasedItems = const [],
+    this.trips = const [],
   });
 
   TripState copyWith({
     TripStatus? status,
     GroceryTrip? trip,
     List<PurchasedItem>? purchasedItems,
+    List<GroceryTrip>? trips,
   }) {
     return TripState(
       status: status ?? this.status,
       trip: trip ?? this.trip,
       purchasedItems: purchasedItems ?? this.purchasedItems,
+      trips: trips ?? this.trips,
     );
   }
 }

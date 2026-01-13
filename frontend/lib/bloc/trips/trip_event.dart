@@ -16,3 +16,9 @@ class AddItemToTrip extends TripEvent {
 }
 
 class FinishTrip extends TripEvent {}
+
+class FetchTrips extends TripEvent {
+  final bool? completed;
+
+  FetchTrips({this.completed});
+}

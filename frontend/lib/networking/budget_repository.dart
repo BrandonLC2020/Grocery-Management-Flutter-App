@@ -12,6 +12,16 @@ class BudgetRepository {
     final budgetDto = MonthlyBudgetDto.fromMap(response.data);
     return budgetDto.toMonthlyBudget();
   }
+
+  Future<MonthlyBudget> setBudget(int year, int month, double amount) async {
+    final response = await _apiClient.post('/api/budget/', data: {
+      'year': year,
+      'month': month,
+      'budget_amount': amount,
+    });
+    final budgetDto = MonthlyBudgetDto.fromMap(response.data);
+    return budgetDto.toMonthlyBudget();
+  }
 }
 
 extension on MonthlyBudgetDto {

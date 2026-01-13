@@ -25,12 +25,25 @@ class PantryRepository {
     return pantryItemDto.toPantryItem();
   }
 
+  Future<PantryItem> updatePantryItem(int id, String name, int? categoryId) async {
+    final response = await _apiClient.patch('/api/pantry/$id/', data: {
+      'name': name,
+      if (categoryId != null) 'category': categoryId,
+    });
+    final pantryItemDto = PantryItemDto.fromMap(response.data);
+    return pantryItemDto.toPantryItem();
+  }
+
   Future<PantryItem> updatePantryItemQuantity(int id, int quantity) async {
     final response = await _apiClient.patch('/api/pantry/$id/', data: {
       'quantity': quantity,
     });
     final pantryItemDto = PantryItemDto.fromMap(response.data);
     return pantryItemDto.toPantryItem();
+  }
+
+  Future<void> deletePantryItem(int id) async {
+    await _apiClient.delete('/api/pantry/$id/');
   }
 }
 

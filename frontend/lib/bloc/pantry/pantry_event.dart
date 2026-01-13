@@ -19,3 +19,9 @@ class UpdatePantryItem extends PantryEvent {
 
   UpdatePantryItem({required this.id, required this.quantity});
 }
+
+class DeletePantryItem extends PantryEvent {
+  final int id;
+
+  DeletePantryItem({required this.id});
+}

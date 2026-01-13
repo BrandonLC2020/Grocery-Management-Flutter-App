@@ -15,6 +15,7 @@ class TripBloc extends Bloc<TripEvent, TripState> {
     on<StartTrip>(_onStartTrip);
     on<AddItemToTrip>(_onAddItemToTrip);
     on<FinishTrip>(_onFinishTrip);
+    on<FetchTrips>(_onFetchTrips);
   }
 
   void _onStartTrip(StartTrip event, Emitter<TripState> emit) async {
@@ -45,6 +46,18 @@ class TripBloc extends Bloc<TripEvent, TripState> {
       await _tripRepository.finishTrip(state.trip!.id);
       emit(state.copyWith(status: TripStatus.finished));
     } catch (e) {
+      emit(state.copyWith(status: TripStatus.error));
+    }
+  }
+
+  void _onFetchTrips(FetchTrips event, Emitter<TripState> emit) async {
+    emit(state.copyWith(status: TripStatus.active)); // Or loading status if desired
+    try {
+      final trips = await _tripRepository.getTrips(completed: event.completed);
+      emit(state.copyWith(trips: trips));
+    } catch (e) {
+      // Handle error if needed, but maybe don't change overall status if it interrupts active trip flow?
+      // Assuming separate status might be better or just use 'error'
       emit(state.copyWith(status: TripStatus.error));
     }
   }

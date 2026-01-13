@@ -30,6 +30,10 @@ class ApiClient {
     return _dio.patch(path, data: data);
   }
 
+  Future<Response<T>> delete<T>(String path, {dynamic data}) async {
+    return _dio.delete(path, data: data);
+  }
+
   void setAuthToken(String token) {
     _dio.options.headers['Authorization'] = 'Token $token';
   }
